@@ -17,11 +17,4 @@ public class DisciplinaEntity {
 
     @Column(name="designacao")
     private String designacao;
-
-    @OneToMany(
-            mappedBy = "disciplina",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<NotaEntity> notas;
 }

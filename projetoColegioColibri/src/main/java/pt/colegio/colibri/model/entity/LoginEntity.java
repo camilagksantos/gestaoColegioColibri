@@ -14,13 +14,13 @@ public class LoginEntity {
     @Column(name="id_login")
     private Integer idLogin;
 
-    @Column(name="user")
+    @Column(name="username")
     private String username;
 
     @Column(name="password")
     private String password;
 
-    @Column(name="role")
-    @Enumerated(EnumType.STRING)
+    @Column(name="role" )
+    @Enumerated(value = EnumType.STRING)
     private Roles role;
 }

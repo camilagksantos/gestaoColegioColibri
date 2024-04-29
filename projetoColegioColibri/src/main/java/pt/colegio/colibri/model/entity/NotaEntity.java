@@ -1,13 +1,12 @@
 package pt.colegio.colibri.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
 
 import java.time.LocalDate;
 
-@Data
-@Entity
-@Table(name="nota")
+//@Data
+//@Entity
+//@Table(name="nota")
 public class NotaEntity {
 
     @Id
@@ -22,8 +21,8 @@ public class NotaEntity {
     @Column(name="disciplina_id")
     private DisciplinaEntity disciplina;
 
-    @Column(name="semestre_id")
-    private SemestreEntity semestre;
+    @Column(name="periodo_id")
+    private PeriodoEntity semestre;
 
     @Column(name="data_atribuicao")
     private LocalDate dataAtribuicao;

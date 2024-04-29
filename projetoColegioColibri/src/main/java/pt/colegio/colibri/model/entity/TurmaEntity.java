@@ -6,9 +6,9 @@ import pt.colegio.colibri.business.core.Funcionario;
 
 import java.util.List;
 
-@Data
-@Entity
-@Table(name="turma")
+//@Data
+//@Entity
+//@Table(name="turma")
 public class TurmaEntity {
 
     @Id

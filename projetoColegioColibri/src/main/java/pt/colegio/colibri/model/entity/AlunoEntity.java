@@ -3,9 +3,9 @@ package pt.colegio.colibri.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
-@Entity
-@Table(name="aluno")
+//@Data
+//@Entity
+//@Table(name="aluno")
 public class AlunoEntity extends PessoaEntity {
 
     @Id
