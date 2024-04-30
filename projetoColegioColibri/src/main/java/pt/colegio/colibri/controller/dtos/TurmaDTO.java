@@ -1,9 +1,9 @@
-package pt.colegio.colibri.business.core;
+package pt.colegio.colibri.controller.dtos;
 
 import lombok.Data;
 
 @Data
-public class Turma {
+public class TurmaDTO {
 
     private Integer idTurma;
     private String designacao;

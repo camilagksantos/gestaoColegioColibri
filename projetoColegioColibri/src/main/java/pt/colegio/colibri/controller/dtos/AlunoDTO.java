@@ -1,9 +1,9 @@
-package pt.colegio.colibri.business.core;
+package pt.colegio.colibri.controller.dtos;
 
 import lombok.Data;
 
 @Data
-public class Pessoa {
+public class AlunoDTO {
 
     private Integer id;
     private String nome;
@@ -11,4 +11,5 @@ public class Pessoa {
     private Integer idade;
     private String email;
     private Integer loginId;
+    private Integer turmaId;
 }

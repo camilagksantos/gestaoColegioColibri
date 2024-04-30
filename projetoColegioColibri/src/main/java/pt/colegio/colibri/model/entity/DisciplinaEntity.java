@@ -11,7 +11,7 @@ import java.util.List;
 public class DisciplinaEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_disciplina")
     private Integer idDisciplina;
 

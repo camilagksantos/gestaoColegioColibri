@@ -1,11 +1,11 @@
-package pt.colegio.colibri.business.core;
+package pt.colegio.colibri.controller.dtos;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class Nota {
+public class NotaDTO {
 
     private Integer idNota;
     private Integer alunoId;

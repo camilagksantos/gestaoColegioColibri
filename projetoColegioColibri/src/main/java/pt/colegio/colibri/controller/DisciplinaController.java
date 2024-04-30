@@ -27,7 +27,6 @@ public class DisciplinaController {
     @ResponseStatus(HttpStatus.OK)
     public List<DisciplinaDTO> getDisciplinas(){
         var disciplinas = disciplinaService.getDisciplinas();
-
-        return disciplinaControllerMapper.convertToDisciplinaDTO(disciplinas);
+        return disciplinaControllerMapper.convertToDisciplinaDTOList(disciplinas);
     }
 }

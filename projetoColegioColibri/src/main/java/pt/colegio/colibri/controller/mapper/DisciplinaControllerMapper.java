@@ -12,6 +12,6 @@ public interface DisciplinaControllerMapper {
     DisciplinaDTO convertToDisciplinaDTO(Disciplina disciplina);
     Disciplina convertToDisciplina(DisciplinaDTO disciplinaDTO);
 
-    List<DisciplinaDTO> convertToDisciplinaDTO(List<Disciplina> disciplinas);
-    List<Disciplina> convertToDisciplina(List<DisciplinaDTO> disciplinaDTOS);
+    List<DisciplinaDTO> convertToDisciplinaDTOList(List<Disciplina> disciplinas);
+    List<Disciplina> convertToDisciplinaList(List<DisciplinaDTO> disciplinaDTOS);
 }

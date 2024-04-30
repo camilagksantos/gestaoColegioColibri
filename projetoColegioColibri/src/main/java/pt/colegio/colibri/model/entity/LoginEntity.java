@@ -10,7 +10,7 @@ import pt.colegio.colibri.business.core.enuns.Roles;
 public class LoginEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_login")
     private Integer idLogin;
 

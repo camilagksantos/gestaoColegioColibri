@@ -12,6 +12,6 @@ public interface LoginModelMapper {
     LoginEntity convertToLoginEntity(Login login);
     Login convertToLogin(LoginEntity loginEntity);
 
-    List<LoginEntity> convertToLoginEntityList(List<Login> login);
-    List<Login> convertToLoginList(List<LoginEntity> loginEntity);
+    List<LoginEntity> convertToLoginEntityList(List<Login> logins);
+    List<Login> convertToLoginList(List<LoginEntity> loginEntities);
 }

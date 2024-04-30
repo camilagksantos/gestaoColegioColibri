@@ -9,18 +9,18 @@ import lombok.Data;
 //@Entity
 public class PessoaEntity {
 
-    @Column(name="nome")
-    private String nome;
-
-    @Column(name="apelido")
-    private String apelido;
-
-    @Column(name="idade")
-    private Integer idade;
-
-    @Column(name="email")
-    private String email;
-
-    @Column(name="login_id")
-    private LoginEntity loginId;
+//    @Column(name="nome")
+//    private String nome;
+//
+//    @Column(name="apelido")
+//    private String apelido;
+//
+//    @Column(name="idade")
+//    private Integer idade;
+//
+//    @Column(name="email")
+//    private String email;
+//
+//    @Column(name="login_id")
+//    private LoginEntity loginId;
 }

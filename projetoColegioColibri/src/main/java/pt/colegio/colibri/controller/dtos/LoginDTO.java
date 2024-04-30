@@ -7,10 +7,7 @@ import pt.colegio.colibri.business.core.enuns.Roles;
 public class LoginDTO {
 
     private Integer idLogin;
-
     private String username;
-
     private String password;
-
     private Roles role;
 }
