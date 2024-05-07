@@ -2,6 +2,7 @@ package pt.colegio.colibri.model;
 
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Aluno;
+import pt.colegio.colibri.model.entity.AlunoEntity;
 import pt.colegio.colibri.model.mapper.AlunoModelMapper;
 import pt.colegio.colibri.model.repository.AlunoRepository;
 
@@ -22,5 +23,31 @@ public class AlunoModel {
         var alunosEntity = alunoRepository.findAll();
 
         return alunoModelMapper.convertToAlunoList(alunosEntity);
+    }
+
+    public Aluno getAluno(Integer idAluno) {
+        AlunoEntity alunoEntity = alunoRepository.findById(idAluno)
+                .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+        return alunoModelMapper.convertToAluno(alunoEntity);
+    }
+
+    public Aluno addAluno(Aluno aluno) {
+        AlunoEntity alunoEntity = alunoModelMapper.convertToAlunoEntity(aluno);
+
+        alunoRepository.save(alunoEntity);
+
+        return alunoModelMapper.convertToAluno(alunoEntity);
+    }
+
+    public Aluno updateAluno(Aluno aluno) {
+        AlunoEntity alunoEntity = alunoModelMapper.convertToAlunoEntity(aluno);
+
+        alunoRepository.save(alunoEntity);
+
+        return alunoModelMapper.convertToAluno(alunoEntity);
+    }
+
+    public void deleteAluno(Integer idAluno) {
+        alunoRepository.deleteById(idAluno);
     }
 }

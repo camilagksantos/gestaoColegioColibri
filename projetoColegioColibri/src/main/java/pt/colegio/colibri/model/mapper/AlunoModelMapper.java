@@ -1,6 +1,7 @@
 package pt.colegio.colibri.model.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pt.colegio.colibri.business.core.Aluno;
 import pt.colegio.colibri.model.entity.AlunoEntity;
 
@@ -11,7 +12,5 @@ public interface AlunoModelMapper {
 
     AlunoEntity convertToAlunoEntity(Aluno aluno);
     Aluno convertToAluno(AlunoEntity alunoEntity);
-
-    List<AlunoEntity> convertToAlunoEntityList(List<Aluno> alunos);
     List<Aluno> convertToAlunoList(List<AlunoEntity> alunoEntities);
 }

@@ -18,4 +18,20 @@ public class NotaService {
     public List<Nota> getNotas(){
         return notaModel.getNotas();
     }
+
+    public Nota getNota(Integer idNota) {
+        return notaModel.getNota(idNota);
+    }
+
+    public Nota addNota(Nota nota) {
+        return notaModel.addNota(nota);
+    }
+
+    public Nota updateNota(Nota nota) {
+        return notaModel.updateNota(nota);
+    }
+
+    public void deleteNota(Integer idNota) {
+        notaModel.deleteNota(idNota);
+    }
 }

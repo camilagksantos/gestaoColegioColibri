@@ -10,5 +10,5 @@ public class Pessoa {
     private String apelido;
     private Integer idade;
     private String email;
-    private Integer loginId;
+    private Login login;
 }

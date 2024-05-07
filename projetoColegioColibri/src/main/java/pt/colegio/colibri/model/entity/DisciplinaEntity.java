@@ -3,12 +3,12 @@ package pt.colegio.colibri.model.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.io.Serializable;
 
 @Data
 @Entity
 @Table(name="disciplina")
-public class DisciplinaEntity {
+public class DisciplinaEntity implements Serializable  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

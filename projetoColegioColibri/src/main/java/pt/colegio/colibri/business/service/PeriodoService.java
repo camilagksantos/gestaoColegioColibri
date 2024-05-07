@@ -16,6 +16,22 @@ public class PeriodoService {
     }
 
     public List<Periodo> getPeriodos(){
-        return periodoModel.getPeriodo();
+        return periodoModel.getPeriodos();
+    }
+
+    public Periodo getPeriodo(Integer idPeriodo) {
+        return periodoModel.getPeriodo(idPeriodo);
+    }
+
+    public Periodo addPeriodo(Periodo periodo) {
+        return periodoModel.addPeriodo(periodo);
+    }
+
+    public Periodo updatePeriodo(Periodo periodo) {
+        return periodoModel.updatePeriodo(periodo);
+    }
+
+    public void deletePeriodo(Integer idPeriodo) {
+        periodoModel.deletePeriodo(idPeriodo);
     }
 }

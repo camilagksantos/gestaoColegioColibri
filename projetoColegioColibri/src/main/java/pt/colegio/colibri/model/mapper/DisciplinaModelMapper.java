@@ -13,7 +13,5 @@ public interface DisciplinaModelMapper {
 
     DisciplinaEntity convertToDisciplinaEntity(Disciplina disciplina);
     Disciplina convertToDisciplina(DisciplinaEntity disciplinaEntity);
-
-    List<DisciplinaEntity> convertToDisciplinaEntityList(List<Disciplina> disciplinas);
     List<Disciplina> convertToDisciplinaList(List<DisciplinaEntity> disciplinaEntities);
 }

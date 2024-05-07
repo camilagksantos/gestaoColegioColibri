@@ -2,10 +2,9 @@ package pt.colegio.colibri.model;
 
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Disciplina;
+import pt.colegio.colibri.model.entity.DisciplinaEntity;
 import pt.colegio.colibri.model.mapper.DisciplinaModelMapper;
-import pt.colegio.colibri.model.mapper.LoginModelMapper;
 import pt.colegio.colibri.model.repository.DisciplinaRepository;
-import pt.colegio.colibri.model.repository.LoginRepository;
 
 import java.util.List;
 
@@ -24,5 +23,31 @@ public class DisciplinaModel {
         var disciplinaEntity = disciplinaRepository.findAll();
 
         return disciplinaModelMapper.convertToDisciplinaList(disciplinaEntity);
+    }
+
+    public Disciplina getDisciplina(Integer idDisciplina) {
+        DisciplinaEntity disciplinaEntity = disciplinaRepository.findById(idDisciplina)
+                .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+        return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
+    }
+
+    public Disciplina addDisciplina(Disciplina disciplina) {
+        DisciplinaEntity disciplinaEntity = disciplinaModelMapper.convertToDisciplinaEntity(disciplina);
+
+        disciplinaRepository.save(disciplinaEntity);
+
+        return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
+    }
+
+    public Disciplina updateDisciplina(Disciplina disciplina) {
+        DisciplinaEntity disciplinaEntity = disciplinaModelMapper.convertToDisciplinaEntity(disciplina);
+
+        disciplinaRepository.save(disciplinaEntity);
+
+        return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
+    }
+
+    public void deleteDisciplina(Integer idDisciplina) {
+        disciplinaRepository.deleteById(idDisciplina);
     }
 }

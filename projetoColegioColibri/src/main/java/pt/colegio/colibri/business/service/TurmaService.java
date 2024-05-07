@@ -18,4 +18,20 @@ public class TurmaService {
     public List<Turma> getTurmas(){
         return turmaModel.getTurmas();
     }
+
+    public Turma getTurma(Integer idTurma) {
+        return turmaModel.getTurma(idTurma);
+    }
+
+    public Turma addTurma(Turma turma) {
+        return turmaModel.addTurma(turma);
+    }
+
+    public Turma updateTurma(Turma turma) {
+        return turmaModel.updateTurma(turma);
+    }
+
+    public void deleteTurma(Integer idTurma) {
+        turmaModel.deleteTurma(idTurma);
+    }
 }

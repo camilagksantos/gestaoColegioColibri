@@ -11,7 +11,5 @@ public interface NotaModelMapper {
 
     NotaEntity convertToNotaEntity(Nota nota);
     Nota convertToNota(NotaEntity notaEntity);
-
-    List<NotaEntity> convertToNotaEntityList(List<Nota >  notas);
     List<Nota> convertToNotaList(List<NotaEntity> notaEntities);
 }

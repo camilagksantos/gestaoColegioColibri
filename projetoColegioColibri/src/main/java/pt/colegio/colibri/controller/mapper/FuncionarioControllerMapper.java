@@ -1,17 +1,21 @@
 package pt.colegio.colibri.controller.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import pt.colegio.colibri.business.core.Funcionario;
-import pt.colegio.colibri.controller.dtos.FuncionarioDTO;
+import pt.colegio.colibri.controller.dtos.request.FuncionarioRequestDTO;
+import pt.colegio.colibri.controller.dtos.response.FuncionarioResponseDTO;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface FuncionarioControllerMapper {
 
-    FuncionarioDTO convertToFuncionarioDTO(Funcionario funcionario);
-    Funcionario convertToFuncionario(FuncionarioDTO funcionarioDTO);
+    @Mapping(target = "loginId", source = "login.idLogin")
+    FuncionarioResponseDTO convertToFuncionarioDTO(Funcionario funcionario);
+    Funcionario convertToFuncionario(FuncionarioRequestDTO funcionarioRequestDTO);
+    @Mapping(target = "id", source = "idFuncionario")
+    Funcionario convertToFuncionario(FuncionarioRequestDTO funcionarioRequestDTO, Integer idFuncionario);
 
-    List<FuncionarioDTO> convertToFuncionarioDTOList(List<Funcionario> funcionario);
-    List<Funcionario> convertToFuncionarioList(List<FuncionarioDTO> funcionarioDTOS);
+    List<FuncionarioResponseDTO> convertToFuncionarioDTOList(List<Funcionario> funcionario);
 }

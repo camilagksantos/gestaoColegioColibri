@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.Data;
 import pt.colegio.colibri.business.core.enuns.Roles;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name="login")
-public class LoginEntity {
+public class LoginEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

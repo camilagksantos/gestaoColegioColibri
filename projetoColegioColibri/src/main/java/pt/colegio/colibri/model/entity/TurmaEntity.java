@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import lombok.Data;
 import pt.colegio.colibri.business.core.Funcionario;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name="turma")
-public class TurmaEntity {
+public class TurmaEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,9 +20,7 @@ public class TurmaEntity {
     @Column(name="designacao")
     private String designacao;
 
-
-    //@Column(name="professor_id")
-    //private FuncionarioEntity professor;
-
-
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "professor_id", referencedColumnName = "id_funcionario")
+    private FuncionarioEntity professor;
 }

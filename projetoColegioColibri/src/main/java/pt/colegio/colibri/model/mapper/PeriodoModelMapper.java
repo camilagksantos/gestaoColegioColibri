@@ -11,7 +11,5 @@ public interface PeriodoModelMapper {
 
     PeriodoEntity convertToPeriodoEntity(Periodo periodo);
     Periodo convertToPeriodo(PeriodoEntity periodoEntity);
-
-    List<PeriodoEntity> convertToPeriodoEntityList(List<Periodo> periodos);
     List<Periodo> convertToPeriodoList(List<PeriodoEntity> periodoEntities);
 }

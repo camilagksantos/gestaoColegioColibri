@@ -1,10 +1,10 @@
-package pt.colegio.colibri.controller.dtos;
+package pt.colegio.colibri.controller.dtos.response;
 
 import lombok.Data;
 import pt.colegio.colibri.business.core.enuns.Roles;
 
 @Data
-public class LoginDTO {
+public class LoginResponseDTO {
 
     private Integer idLogin;
     private String username;

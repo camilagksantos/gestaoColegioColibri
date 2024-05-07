@@ -1,9 +1,9 @@
-package pt.colegio.colibri.controller.dtos;
+package pt.colegio.colibri.controller.dtos.response;
 
 import lombok.Data;
 
 @Data
-public class DisciplinaDTO {
+public class DisciplinaResponseDTO {
 
     private Integer idDisciplina;
     private String designacao;

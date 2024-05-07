@@ -18,4 +18,20 @@ public class DisciplinaService {
     public List<Disciplina> getDisciplinas(){
         return disciplinaModel.getDisciplinas();
     }
+
+    public Disciplina getDisciplina(Integer idDisciplina) {
+        return disciplinaModel.getDisciplina(idDisciplina);
+    }
+
+    public Disciplina addDisciplina(Disciplina disciplina) {
+        return disciplinaModel.addDisciplina(disciplina);
+    }
+
+    public Disciplina updateDisciplina(Disciplina disciplina) {
+        return disciplinaModel.updateDisciplina(disciplina);
+    }
+
+    public void deleteDisciplina(Integer idDisciplina) {
+        disciplinaModel.deleteDisciplina(idDisciplina);
+    }
 }

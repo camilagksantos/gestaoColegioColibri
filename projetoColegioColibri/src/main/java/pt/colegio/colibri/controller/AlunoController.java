@@ -1,12 +1,11 @@
 package pt.colegio.colibri.controller;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pt.colegio.colibri.business.core.Aluno;
 import pt.colegio.colibri.business.service.AlunoService;
-import pt.colegio.colibri.controller.dtos.AlunoDTO;
+import pt.colegio.colibri.controller.dtos.request.AlunoRequestDTO;
+import pt.colegio.colibri.controller.dtos.response.AlunoResponseDTO;
 import pt.colegio.colibri.controller.mapper.AlunoControllerMapper;
 
 import java.util.List;
@@ -25,8 +24,42 @@ public class AlunoController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<AlunoDTO> getAlunos(){
+    public List<AlunoResponseDTO> getAlunos(){
         var alunos = alunoService.getAlunos();
         return alunoControllerMapper.convertToAlunoDTOList(alunos);
+    }
+
+    @GetMapping("/{idAluno}")
+    @ResponseStatus(HttpStatus.OK)
+    public AlunoResponseDTO getAluno(@PathVariable Integer idAluno){
+        Aluno aluno = alunoService.getAluno(idAluno);
+
+        return alunoControllerMapper.convertToAlunoDTO(aluno);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public AlunoResponseDTO addAluno(@RequestBody AlunoRequestDTO alunoRequestDTO){
+        Aluno aluno = alunoControllerMapper.convertToAluno(alunoRequestDTO);
+
+        Aluno alunoSalvo = alunoService.addAluno(aluno);
+
+        return alunoControllerMapper.convertToAlunoDTO(alunoSalvo);
+    }
+
+    @PutMapping("/{idAluno}")
+    @ResponseStatus(HttpStatus.OK)
+    public AlunoResponseDTO updateAluno(@RequestBody AlunoRequestDTO alunoRequestDTO, @PathVariable Integer idAluno){
+        Aluno aluno = alunoControllerMapper.convertToAluno(alunoRequestDTO, idAluno);
+
+        Aluno alunoAtualizado = alunoService.updateAluno(aluno);
+
+        return alunoControllerMapper.convertToAlunoDTO(alunoAtualizado);
+    }
+
+    @DeleteMapping("/{idAluno}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAluno(@PathVariable Integer idAluno){
+        alunoService.deleteAluno(idAluno);
     }
 }

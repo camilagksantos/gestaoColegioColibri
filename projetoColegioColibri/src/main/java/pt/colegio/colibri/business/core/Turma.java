@@ -7,5 +7,5 @@ public class Turma {
 
     private Integer idTurma;
     private String designacao;
-    private Integer professorId;
+    private Funcionario professor;
 }
