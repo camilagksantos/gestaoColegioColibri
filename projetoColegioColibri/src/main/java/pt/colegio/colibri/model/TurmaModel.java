@@ -13,9 +13,7 @@ import java.util.List;
 
 @Component
 public class TurmaModel {
-
     private final TurmaRepository turmaRepository;
-
     private final FuncionarioRepository funcionarioRepository;
     private final TurmaModelMapper turmaModelMapper;
 
@@ -27,6 +25,7 @@ public class TurmaModel {
 
     public List<Turma> getTurmas() {
         var turmasEntity = turmaRepository.findAll();
+
         return turmaModelMapper.convertToTurmaList(turmasEntity);
     }
 
@@ -40,6 +39,7 @@ public class TurmaModel {
     public Turma addTurma(Turma turma) {
 
         var professor = getFuncionario( turma.getProfessor().getId() );
+
         TurmaEntity turmaEntity = turmaModelMapper.convertToTurmaEntity(turma, professor);
 
         turmaRepository.save(turmaEntity);
@@ -51,6 +51,7 @@ public class TurmaModel {
     public Turma updateTurma(Turma turma) {
 
         var professor = getFuncionario( turma.getProfessor().getId() );
+
         TurmaEntity turmaEntity = turmaModelMapper.convertToTurmaEntity(turma, professor);
 
         turmaRepository.save(turmaEntity);
@@ -64,6 +65,6 @@ public class TurmaModel {
 
     private FuncionarioEntity getFuncionario(Integer professorId){
         return funcionarioRepository.findById( professorId )
-                .orElseThrow(() -> new RuntimeException("Funcionario não Encontrado!"));
+                                    .orElseThrow(() -> new RuntimeException("Funcionario não Encontrado!"));
     }
 }

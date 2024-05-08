@@ -1,5 +1,6 @@
 package pt.colegio.colibri.model;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Periodo;
 import pt.colegio.colibri.model.entity.PeriodoEntity;
@@ -10,7 +11,6 @@ import java.util.List;
 
 @Component
 public class PeriodoModel {
-
     private final PeriodoRepository periodoRepository;
     private final PeriodoModelMapper periodoModelMapper;
 
@@ -27,10 +27,11 @@ public class PeriodoModel {
 
     public Periodo getPeriodo(Integer idPeriodo) {
         PeriodoEntity periodoEntity = periodoRepository.findById(idPeriodo)
-                .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                       .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
         return periodoModelMapper.convertToPeriodo(periodoEntity);
     }
 
+    @Transactional
     public Periodo addPeriodo(Periodo periodo) {
         PeriodoEntity periodoEntity = periodoModelMapper.convertToPeriodoEntity(periodo);
 
@@ -39,6 +40,7 @@ public class PeriodoModel {
         return periodoModelMapper.convertToPeriodo(periodoEntity);
     }
 
+    @Transactional
     public Periodo updatePeriodo(Periodo periodo) {
         PeriodoEntity periodoEntity = periodoModelMapper.convertToPeriodoEntity(periodo);
 

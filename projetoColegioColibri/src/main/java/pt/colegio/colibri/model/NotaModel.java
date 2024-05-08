@@ -1,5 +1,6 @@
 package pt.colegio.colibri.model;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Nota;
 import pt.colegio.colibri.model.entity.NotaEntity;
@@ -31,6 +32,7 @@ public class NotaModel {
         return notaModelMapper.convertToNota(notaEntity);
     }
 
+    @Transactional
     public Nota addNota(Nota nota) {
         NotaEntity notaEntity = notaModelMapper.convertToNotaEntity(nota);
 
@@ -39,6 +41,7 @@ public class NotaModel {
         return notaModelMapper.convertToNota(notaEntity);
     }
 
+    @Transactional
     public Nota updateNota(Nota nota) {
         NotaEntity notaEntity = notaModelMapper.convertToNotaEntity(nota);
 

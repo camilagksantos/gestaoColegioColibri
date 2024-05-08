@@ -13,8 +13,11 @@ public interface FuncionarioControllerMapper {
 
     @Mapping(target = "loginId", source = "login.idLogin")
     FuncionarioResponseDTO convertToFuncionarioDTO(Funcionario funcionario);
+    @Mapping(target = "login.idLogin", source = "loginId")
     Funcionario convertToFuncionario(FuncionarioRequestDTO funcionarioRequestDTO);
+
     @Mapping(target = "id", source = "idFuncionario")
+    @Mapping(target = "login.idLogin", source = "funcionarioRequestDTO.loginId")
     Funcionario convertToFuncionario(FuncionarioRequestDTO funcionarioRequestDTO, Integer idFuncionario);
 
     List<FuncionarioResponseDTO> convertToFuncionarioDTOList(List<Funcionario> funcionario);

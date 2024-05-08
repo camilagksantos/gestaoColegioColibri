@@ -1,5 +1,6 @@
 package pt.colegio.colibri.model;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Disciplina;
 import pt.colegio.colibri.model.entity.DisciplinaEntity;
@@ -31,6 +32,7 @@ public class DisciplinaModel {
         return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
     }
 
+    @Transactional
     public Disciplina addDisciplina(Disciplina disciplina) {
         DisciplinaEntity disciplinaEntity = disciplinaModelMapper.convertToDisciplinaEntity(disciplina);
 
@@ -39,6 +41,7 @@ public class DisciplinaModel {
         return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
     }
 
+    @Transactional
     public Disciplina updateDisciplina(Disciplina disciplina) {
         DisciplinaEntity disciplinaEntity = disciplinaModelMapper.convertToDisciplinaEntity(disciplina);
 
