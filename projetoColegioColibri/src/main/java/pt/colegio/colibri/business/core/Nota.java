@@ -9,8 +9,8 @@ public class Nota {
 
     private Integer idNota;
     private Integer alunoId;
-    private Integer disciplinaId;
-    private Integer periodoId;
+    private Disciplina disciplina;
+    private Periodo periodo;
     private LocalDate dataAtribuicao;
     private Double nota;
 }

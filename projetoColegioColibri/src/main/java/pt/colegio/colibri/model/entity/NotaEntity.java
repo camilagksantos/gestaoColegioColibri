@@ -16,15 +16,15 @@ public class NotaEntity implements Serializable  {
     @Column(name="id_nota")
     private Integer idNota;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id_aluno")
     private AlunoEntity aluno;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id_disciplina")
     private DisciplinaEntity disciplina;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "periodo_id", referencedColumnName = "id_periodo")
     private PeriodoEntity periodo;
 
