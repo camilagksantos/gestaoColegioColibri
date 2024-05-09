@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Entity
 @Table(name="disciplina")
 public class DisciplinaEntity implements Serializable  {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_disciplina")

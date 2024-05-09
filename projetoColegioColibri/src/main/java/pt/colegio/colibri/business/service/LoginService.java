@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class LoginService {
-
     private final LoginModel loginModel;
 
     public LoginService(LoginModel loginModel) {

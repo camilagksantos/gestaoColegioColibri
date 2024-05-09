@@ -10,12 +10,14 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface TurmaControllerMapper {
-
     @Mapping(target = "professor.id", source = "professor.id")
     TurmaResponseDTO convertToTurmaDTO(Turma turma);
+
     @Mapping(target = "professor.id", source = "professorId")
     Turma convertToTurma(TurmaRequestDTO turmaRequestDTO);
+
     @Mapping(target = "professor.id", source = "turmaRequestDTO.professorId")
     Turma convertToTurma(TurmaRequestDTO turmaRequestDTO, Integer idTurma);
+
     List<TurmaResponseDTO> convertToTurmaDTOList(List<Turma> turmas);
 }

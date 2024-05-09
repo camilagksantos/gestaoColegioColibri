@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class DisciplinaService {
-
     private final DisciplinaModel disciplinaModel;
 
     public DisciplinaService(DisciplinaModel disciplinaModel) {

@@ -4,6 +4,5 @@ import lombok.Data;
 
 @Data
 public class Aluno extends Pessoa {
-
-    private Integer turmaId;
+    private Turma turma;
 }

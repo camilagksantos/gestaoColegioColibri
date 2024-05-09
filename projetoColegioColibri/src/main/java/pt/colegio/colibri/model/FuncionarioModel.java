@@ -32,6 +32,7 @@ public class FuncionarioModel {
     public Funcionario getFuncionario(Integer idFuncionario) {
         FuncionarioEntity funcionarioEntity = funcionarioRepository.findById(idFuncionario)
                                                                    .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+
         return funcionarioModelMapper.convertToFuncionario(funcionarioEntity);
     }
 

@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-
     @ExceptionHandler(value = Exception.class)
     public ProblemDetail exceptionNaoEncontrado(Exception exception){
         ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);

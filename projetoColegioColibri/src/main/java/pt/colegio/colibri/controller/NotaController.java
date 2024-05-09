@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/notas")
 public class NotaController {
-
     private final NotaService notaService;
     private final NotaControllerMapper notaControllerMapper;
 
@@ -26,6 +25,7 @@ public class NotaController {
     @ResponseStatus(HttpStatus.OK)
     public List<NotaResponseDTO> getNotas(){
         var notas = notaService.getNotas();
+
         return notaControllerMapper.convertToNotaDTOList(notas);
     }
 

@@ -11,9 +11,8 @@ import pt.colegio.colibri.controller.mapper.AlunoControllerMapper;
 import java.util.List;
 
 @RestController
-@RequestMapping("/aluno")
+@RequestMapping("/alunos")
 public class AlunoController {
-
     private final AlunoService alunoService;
     private final AlunoControllerMapper alunoControllerMapper;
 
@@ -26,6 +25,7 @@ public class AlunoController {
     @ResponseStatus(HttpStatus.OK)
     public List<AlunoResponseDTO> getAlunos(){
         var alunos = alunoService.getAlunos();
+
         return alunoControllerMapper.convertToAlunoDTOList(alunos);
     }
 

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Entity
 @Table(name="nota")
 public class NotaEntity implements Serializable  {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_nota")

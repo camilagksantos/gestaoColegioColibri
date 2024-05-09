@@ -10,10 +10,10 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface FuncionarioModelMapper {
-
     @Mapping(target = "idFuncionario", source = "funcionario.id")
     @Mapping(target = "login", source = "login")
     FuncionarioEntity convertToFuncionarioEntity(Funcionario funcionario, LoginEntity login);
+
     @Mapping(target = "id", source = "idFuncionario")
     Funcionario convertToFuncionario(FuncionarioEntity funcionarioEntity);
 

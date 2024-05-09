@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class NotaService {
-
     private final NotaModel notaModel;
 
     public NotaService(NotaModel notaModel) {

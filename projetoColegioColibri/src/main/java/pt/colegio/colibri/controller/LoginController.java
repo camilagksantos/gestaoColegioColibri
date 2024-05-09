@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/logins")
 public class LoginController {
-
     private final LoginService loginService;
     private final LoginControllerMapper loginControllerMapper;
 

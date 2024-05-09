@@ -37,13 +37,14 @@ public class NotaModel {
 
     public Nota getNota(Integer idNota) {
         NotaEntity notaEntity = notaRepository.findById(idNota)
-                .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                              .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+
         return notaModelMapper.convertToNota(notaEntity);
     }
 
     @Transactional
     public Nota addNota(Nota nota) {
-        var disciplina = getDisciplina( nota.getDisciplina().getIdDisciplina() );
+        var disciplina = getDisciplina( nota.getDisciplina().getIdDisciplina());
         var periodo = getPeriodo(nota.getPeriodo().getIdPeriodo());
         var aluno = getAluno(nota.getAlunoId());
 
@@ -56,7 +57,7 @@ public class NotaModel {
 
     @Transactional
     public Nota updateNota(Nota nota) {
-        var disciplina = getDisciplina( nota.getDisciplina().getIdDisciplina() );
+        var disciplina = getDisciplina( nota.getDisciplina().getIdDisciplina());
         var periodo = getPeriodo(nota.getPeriodo().getIdPeriodo());
         var aluno = getAluno(nota.getAlunoId());
 
@@ -73,16 +74,16 @@ public class NotaModel {
 
     private DisciplinaEntity getDisciplina(Integer disciplinaId){
         return disciplinaRepository.findById( disciplinaId )
-                .orElseThrow(() -> new RuntimeException("Disciplina não Encontrada!"));
+                                   .orElseThrow(() -> new RuntimeException("Disciplina não Encontrada!"));
     }
 
     private PeriodoEntity getPeriodo(Integer periodoId){
         return periodoRepository.findById( periodoId )
-                .orElseThrow(() -> new RuntimeException("Periodo não Encontrado!"));
+                                .orElseThrow(() -> new RuntimeException("Periodo não Encontrado!"));
     }
 
     private AlunoEntity getAluno(Integer alunoId){
         return alunoRepository.findById( alunoId )
-                .orElseThrow(() -> new RuntimeException("Aluno não Encontrado!"));
+                              .orElseThrow(() -> new RuntimeException("Aluno não Encontrado!"));
     }
 }

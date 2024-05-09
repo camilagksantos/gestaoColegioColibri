@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/periodos")
 public class PeriodoController {
-
     private final PeriodoService periodoService;
     private final PeriodoControllerMapper periodoControllerMapper;
 
@@ -26,6 +25,7 @@ public class PeriodoController {
     @ResponseStatus(HttpStatus.OK)
     public List<PeriodoResponseDTO> getPeriodos(){
         var periodos = periodoService.getPeriodos();
+
         return periodoControllerMapper.convertToPeriodoDTOList(periodos);
     }
 

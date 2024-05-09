@@ -13,8 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/funcionarios")
 public class FuncionarioController {
-
-
     private final FuncionarioService funcionarioService;
     private final FuncionarioControllerMapper funcionarioControllerMapper;
 
@@ -27,6 +25,7 @@ public class FuncionarioController {
     @ResponseStatus(HttpStatus.OK)
     public List<FuncionarioResponseDTO> getFuncionarios(){
         var funcionarios = funcionarioService.getFuncionarios();
+
         return funcionarioControllerMapper.convertToFuncionarioDTOList(funcionarios);
     }
 
@@ -41,7 +40,6 @@ public class FuncionarioController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public FuncionarioResponseDTO addFuncionario(@RequestBody FuncionarioRequestDTO funcionarioRequestDTO){
-
         Funcionario funcionario = funcionarioControllerMapper.convertToFuncionario(funcionarioRequestDTO);
 
         Funcionario funcionarioSalvo = funcionarioService.addFuncionario(funcionario);

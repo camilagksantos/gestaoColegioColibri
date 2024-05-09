@@ -9,9 +9,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface DisciplinaControllerMapper {
-
     DisciplinaResponseDTO convertToDisciplinaDTO(Disciplina disciplina);
+
     Disciplina convertToDisciplina(DisciplinaRequestDTO disciplinaRequestDTO);
+
     Disciplina convertToDisciplina(DisciplinaRequestDTO disciplinaRequestDTO, Integer idDisciplina);
+
     List<DisciplinaResponseDTO> convertToDisciplinaDTOList(List<Disciplina> disciplinas);
 }

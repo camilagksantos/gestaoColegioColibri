@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/disciplinas")
 public class DisciplinaController {
-
     private final DisciplinaService disciplinaService;
     private final DisciplinaControllerMapper disciplinaControllerMapper;
 
@@ -26,6 +25,7 @@ public class DisciplinaController {
     @ResponseStatus(HttpStatus.OK)
     public List<DisciplinaResponseDTO> getDisciplinas(){
         var disciplinas = disciplinaService.getDisciplinas();
+
         return disciplinaControllerMapper.convertToDisciplinaDTOList(disciplinas);
     }
 

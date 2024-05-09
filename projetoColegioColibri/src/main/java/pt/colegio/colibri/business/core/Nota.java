@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 @Data
 public class Nota {
-
     private Integer idNota;
     private Integer alunoId;
     private Disciplina disciplina;

@@ -2,9 +2,7 @@ package pt.colegio.colibri.model.mapper;
 
 import org.mapstruct.Mapper;
 import pt.colegio.colibri.business.core.Disciplina;
-import pt.colegio.colibri.business.core.Login;
 import pt.colegio.colibri.model.entity.DisciplinaEntity;
-import pt.colegio.colibri.model.entity.LoginEntity;
 
 import java.util.List;
 

@@ -28,7 +28,8 @@ public class DisciplinaModel {
 
     public Disciplina getDisciplina(Integer idDisciplina) {
         DisciplinaEntity disciplinaEntity = disciplinaRepository.findById(idDisciplina)
-                .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                                .orElseThrow(() -> new RuntimeException("Disciplina não Encontrada!"));
+
         return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
     }
 

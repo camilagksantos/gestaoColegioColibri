@@ -32,12 +32,12 @@ public class TurmaModel {
     public Turma getTurma(Integer idTurma) {
         TurmaEntity turmaEntity = turmaRepository.findById(idTurma)
                                                  .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+
         return turmaModelMapper.convertToTurma(turmaEntity);
     }
 
     @Transactional
     public Turma addTurma(Turma turma) {
-
         var professor = getFuncionario( turma.getProfessor().getId() );
 
         TurmaEntity turmaEntity = turmaModelMapper.convertToTurmaEntity(turma, professor);
@@ -49,7 +49,6 @@ public class TurmaModel {
 
     @Transactional
     public Turma updateTurma(Turma turma) {
-
         var professor = getFuncionario( turma.getProfessor().getId() );
 
         TurmaEntity turmaEntity = turmaModelMapper.convertToTurmaEntity(turma, professor);

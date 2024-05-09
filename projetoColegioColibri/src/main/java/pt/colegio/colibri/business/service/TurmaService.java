@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class TurmaService {
-
     private final TurmaModel turmaModel;
 
     public TurmaService(TurmaModel turmaModel) {

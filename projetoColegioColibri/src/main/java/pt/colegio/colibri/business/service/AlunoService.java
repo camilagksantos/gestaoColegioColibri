@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class AlunoService {
-
     private final AlunoModel alunoModel;
 
     public AlunoService(AlunoModel alunoModel) {

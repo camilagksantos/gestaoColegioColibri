@@ -28,6 +28,7 @@ public class PeriodoModel {
     public Periodo getPeriodo(Integer idPeriodo) {
         PeriodoEntity periodoEntity = periodoRepository.findById(idPeriodo)
                                                        .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+
         return periodoModelMapper.convertToPeriodo(periodoEntity);
     }
 

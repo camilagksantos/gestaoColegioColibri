@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class PeriodoService {
-
     private final PeriodoModel periodoModel;
 
     public PeriodoService(PeriodoModel periodoModel) {

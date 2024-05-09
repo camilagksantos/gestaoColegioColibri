@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Entity
 @Table(name="aluno")
 public class AlunoEntity implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_aluno")
@@ -27,11 +26,11 @@ public class AlunoEntity implements Serializable {
     @Column(name="email")
     private String email;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "login_id", referencedColumnName = "id_login")
-    private LoginEntity loginEntity;
+    private LoginEntity login;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "turma_id", referencedColumnName = "id_turma")
-    private TurmaEntity turmaEntity;
+    private TurmaEntity turma;
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class Periodo {
-
     private Integer idPeriodo;
     private String designacao;
 }

@@ -1,6 +1,8 @@
 package pt.colegio.colibri.controller.dtos.response;
 
 import lombok.Data;
+import pt.colegio.colibri.business.core.Login;
+import pt.colegio.colibri.business.core.Turma;
 
 @Data
 public class AlunoResponseDTO {
@@ -10,6 +12,6 @@ public class AlunoResponseDTO {
     private String apelido;
     private Integer idade;
     private String email;
-    private Integer loginId;
-    private Integer turmaId;
+    private Login login;
+    private Turma turma;
 }

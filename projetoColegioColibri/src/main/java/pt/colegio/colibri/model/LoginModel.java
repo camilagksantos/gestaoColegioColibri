@@ -29,6 +29,7 @@ public class LoginModel {
     public Login getLogin(Integer idLogin) {
         LoginEntity loginEntity = loginRepository.findById(idLogin)
                                                  .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+
         return loginModelMapper.convertToLogin(loginEntity);
     }
 

@@ -9,9 +9,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PeriodoControllerMapper {
-
     PeriodoResponseDTO convertToPeriodoDTO(Periodo periodo);
+
     Periodo convertToPeriodo(PeriodoRequestDTO periodoRequestDTO);
+
     Periodo convertToPeriodo(PeriodoRequestDTO periodoRequestDTO, Integer idPeriodo);
+
     List<PeriodoResponseDTO> convertToPeriodoDTOList(List<Periodo> periodos);
 }

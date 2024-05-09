@@ -19,6 +19,6 @@ public interface TurmaModelMapper {
 
     @Mapping(target = "professor.id", source = "professor.idFuncionario")
     Turma convertToTurma(TurmaEntity turmaEntity);
-    List<Turma> convertToTurmaList(List<TurmaEntity> turmaEntities);
 
+    List<Turma> convertToTurmaList(List<TurmaEntity> turmaEntities);
 }

@@ -10,6 +10,8 @@ import java.util.List;
 public interface PeriodoModelMapper {
 
     PeriodoEntity convertToPeriodoEntity(Periodo periodo);
+
     Periodo convertToPeriodo(PeriodoEntity periodoEntity);
+
     List<Periodo> convertToPeriodoList(List<PeriodoEntity> periodoEntities);
 }

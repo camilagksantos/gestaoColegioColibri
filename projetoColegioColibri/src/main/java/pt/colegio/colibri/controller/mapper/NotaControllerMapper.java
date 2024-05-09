@@ -10,7 +10,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface NotaControllerMapper {
-
     NotaResponseDTO convertToNotaDTO(Nota nota);
 
     @Mapping(target = "disciplina.idDisciplina", source = "disciplinaId")
@@ -20,5 +19,6 @@ public interface NotaControllerMapper {
     @Mapping(target = "disciplina.idDisciplina", source = "notaRequestDTO.disciplinaId")
     @Mapping(target = "periodo.idPeriodo", source = "notaRequestDTO.periodoId")
     Nota convertToNota(NotaRequestDTO notaRequestDTO, Integer idNota);
+
     List<NotaResponseDTO> convertToNotaDTOList(List<Nota> notas);
 }

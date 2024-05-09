@@ -8,7 +8,6 @@ import java.util.List;
 
 @Service
 public class FuncionarioService {
-
     private final FuncionarioModel funcionarioModel;
 
     public FuncionarioService(FuncionarioModel funcionarioModel) {

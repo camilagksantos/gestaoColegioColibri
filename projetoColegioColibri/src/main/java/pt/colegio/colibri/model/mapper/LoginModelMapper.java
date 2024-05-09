@@ -10,6 +10,8 @@ import java.util.List;
 public interface LoginModelMapper {
 
     LoginEntity convertToLoginEntity(Login login);
+
     Login convertToLogin(LoginEntity loginEntity);
+
     List<Login> convertToLoginList(List<LoginEntity> loginEntities);
 }

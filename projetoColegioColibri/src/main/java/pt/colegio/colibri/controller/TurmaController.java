@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/turmas")
 public class TurmaController {
-
     private final TurmaService turmaService;
     private final TurmaControllerMapper turmaControllerMapper;
 
@@ -26,6 +25,7 @@ public class TurmaController {
     @ResponseStatus(HttpStatus.OK)
     public List<TurmaResponseDTO> getTurmas(){
         var turmas = turmaService.getTurmas();
+
         return turmaControllerMapper.convertToTurmaDTOList(turmas);
     }
 
