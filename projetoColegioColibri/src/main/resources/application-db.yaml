@@ -1,0 +1,9 @@
+spring:
+  docker:
+    compose:
+      enabled: false
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:3306/bd_projeto_colegio_colibri
+    username: ${MYSQL_USERNAME}
+    password: ${MYSQL_PASSWORD}
+
