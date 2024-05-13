@@ -1,9 +1,11 @@
 package pt.colegio.colibri.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pt.colegio.colibri.business.core.Login;
 import pt.colegio.colibri.business.service.LoginService;
+import pt.colegio.colibri.controller.dtos.request.AuthLoginRequestDTO;
 import pt.colegio.colibri.controller.dtos.request.LoginRequestDTO;
 import pt.colegio.colibri.controller.dtos.response.LoginResponseDTO;
 import pt.colegio.colibri.controller.mapper.LoginControllerMapper;
@@ -22,10 +24,10 @@ public class LoginController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ROLE_DIRETOR','ROLE_PROFESSOR')")
     @ResponseStatus(HttpStatus.OK)
     public List<LoginResponseDTO> getLogins(){
         var logins = loginService.getLogins();
-
         return loginControllerMapper.convertToLoginDTOList(logins);
     }
 
@@ -33,7 +35,6 @@ public class LoginController {
     @ResponseStatus(HttpStatus.OK)
     public LoginResponseDTO getLogin(@PathVariable Integer idLogin){
         Login login = loginService.getLogin(idLogin);
-
         return loginControllerMapper.convertToLoginDTO(login);
     }
 

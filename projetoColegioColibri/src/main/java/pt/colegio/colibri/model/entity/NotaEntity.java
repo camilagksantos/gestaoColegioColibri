@@ -1,6 +1,7 @@
 package pt.colegio.colibri.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,19 +25,24 @@ public class NotaEntity implements Serializable  {
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "aluno_id", referencedColumnName = "id_aluno")
+    @NotNull
     private AlunoEntity aluno;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_id", referencedColumnName = "id_disciplina")
+    @NotNull
     private DisciplinaEntity disciplina;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "periodo_id", referencedColumnName = "id_periodo")
+    @NotNull
     private PeriodoEntity periodo;
 
     @Column(name="data_atribuicao")
+    @NotNull
     private LocalDate dataAtribuicao;
 
     @Column(name="nota")
+    @NotNull
     private Double nota;
 }

@@ -1,6 +1,7 @@
 package pt.colegio.colibri.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -22,5 +23,6 @@ public class PeriodoEntity implements Serializable {
     private Integer idPeriodo;
 
     @Column(name="designacao")
+    @NotBlank
     private String designacao;
 }

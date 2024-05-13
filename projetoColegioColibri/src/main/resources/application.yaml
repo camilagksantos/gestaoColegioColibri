@@ -1,11 +1,19 @@
 spring:
   application:
     name: projetoColegioColibri
+  profiles:
+    active: local
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    validateOnMigrate: true
+    locations: classpath:db/migration
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: validate
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST}:3306/bd_projeto_colegio_colibri
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3306/bd_projeto_colegio_colibri
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+
+

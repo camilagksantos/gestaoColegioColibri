@@ -1,5 +1,9 @@
 package pt.colegio.colibri.business.service;
 
+import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import pt.colegio.colibri.business.core.Login;
 import pt.colegio.colibri.model.LoginModel;
@@ -7,12 +11,10 @@ import pt.colegio.colibri.model.LoginModel;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class LoginService {
-    private final LoginModel loginModel;
 
-    public LoginService(LoginModel loginModel) {
-        this.loginModel = loginModel;
-    }
+    private final LoginModel loginModel;
 
     public List<Login> getLogins(){
         return loginModel.getLogins();
@@ -33,4 +35,5 @@ public class LoginService {
     public void deleteLogin(Integer idLogin) {
         loginModel.deleteLogin(idLogin);
     }
+
 }
