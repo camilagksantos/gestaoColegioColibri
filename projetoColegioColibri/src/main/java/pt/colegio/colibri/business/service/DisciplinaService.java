@@ -6,6 +6,13 @@ import pt.colegio.colibri.model.DisciplinaModel;
 
 import java.util.List;
 
+//Este código é parte de uma aplicação Spring Boot, especificamente uma classe de serviço (DisciplinaService) que interage
+// com um modelo de dados (Disciplina) para realizar operações CRUD (Create, Read, Update, Delete) relacionadas a
+// Disciplinas lecionadas em uma escola.
+
+//A classe é anotada com @Service, marcando-a como um componente de serviço no Spring. Isso significa que o Spring
+// pode gerenciar instâncias desta classe automaticamente.
+
 @Service
 public class DisciplinaService {
     private final DisciplinaModel disciplinaModel;

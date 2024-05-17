@@ -6,6 +6,13 @@ import pt.colegio.colibri.model.TurmaModel;
 
 import java.util.List;
 
+//Este código é parte de uma aplicação Spring Boot, especificamente uma classe de serviço (TurmaService) que interage
+// com um modelo de dados (Turma) para realizar operações CRUD (Create, Read, Update, Delete) relacionadas a
+// turmas de uma escola.
+
+//A classe é anotada com @Service, marcando-a como um componente de serviço no Spring. Isso significa que o Spring
+// pode gerenciar instâncias desta classe automaticamente.
+
 @Service
 public class TurmaService {
     private final TurmaModel turmaModel;

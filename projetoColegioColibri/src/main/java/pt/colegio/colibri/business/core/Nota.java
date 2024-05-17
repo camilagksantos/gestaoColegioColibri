@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
+//A seguinte classe modelo não apresenta construtores, getters, setters,
+// tostring e hashcode por que são geradas automaticamentes pelo lombok e geradas pelo spring
+
 @Data
 public class Nota {
     private Integer idNota;
