@@ -1,5 +1,6 @@
 package pt.colegio.colibri.controller.dtos.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import pt.colegio.colibri.business.core.Login;
 import pt.colegio.colibri.business.core.Turma;
@@ -21,5 +22,6 @@ public class AlunoResponseDTO {
     private Integer idade;
     private String email;
     private Login login;
+
     private Turma turma;
 }

@@ -21,7 +21,7 @@ public class SecurityUtils {
 
     public static String getUsername() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication!= null && authentication.isAuthenticated()) {
+        if (authentication != null && authentication.isAuthenticated()) {
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             return userDetails.getUsername(); // Isso retorna o nome de usuário
         }
