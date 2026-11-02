@@ -10,10 +10,10 @@
 	</parent>
 
 	<groupId>pt.colegio.colibri</groupId>
-	<artifactId>projetoColegioColibri</artifactId>
+	<artifactId>projetoColegioColibriApi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>projetoColegioColibri</name>
-	<description>projetoColegioColibri</description>
+	<name>projetoColegioColibriApi</name>
+	<description>projetoColegioColibriApi</description>
 
 	<properties>
 		<org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
