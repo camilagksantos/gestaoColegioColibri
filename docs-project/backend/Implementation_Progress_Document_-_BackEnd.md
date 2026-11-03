@@ -22,7 +22,7 @@ Schema decisions as they stand:
 * `application.yaml`: active profile `local`; Flyway enabled with `baselineOnMigrate` and `validateOnMigrate`; `spring.jpa.hibernate.ddl-auto: validate`.
 * `application-local.yaml`: Docker Compose support enabled (`docker/docker-compose.yaml`); datasource on `localhost:3306`, database `bd_projeto_colegio_colibri`, hardcoded local credentials.
 * `application-db.yaml`: datasource from `MYSQL_HOST`, `MYSQL_USERNAME`, `MYSQL_PASSWORD`; Docker Compose disabled. Not active by default.
-* `docker/docker-compose.yaml`: one service, `mysql:latest`, port 3306, named volume `data`.
+* `docker/docker-compose.yaml`: one service, `mysql:8.0` (pinned; it was `mysql:latest`, which resolves to MySQL 26.x and is not verified by Flyway), port 3306, named volume `data` (`docker_data`). The previous volume, first initialized by MySQL 26.10, was deleted and recreated, because MySQL 8.0 cannot open data from a newer version.
 
 ## 4. Endpoints
 
@@ -68,7 +68,12 @@ Found in review of the current code. They match the open points in `Context_Docu
 
 ## 8. In Progress
 
-Stack upgrade: the POM now targets Spring Boot 4.0.5, Java 26, MapStruct 1.6.3 and springdoc-openapi 2.8.8, following the `order-flow` backend. Baseline before the change: `mvn clean compile` failed on JDK 26 with `ExceptionInInitializerError: TypeTag :: UNKNOWN` (Lombok 1.18.32). After the change: `mvn clean compile` succeeds and `mvn test` passes (the single test is still `@Disabled`). Code change needed: `WebSecurityConfig` uses the lambda DSL (`csrf(csrf -> csrf.disable())`, `httpBasic(Customizer.withDefaults())`), because Spring Security 7 removed the no-argument forms. Not yet done: running the application against MySQL (Flyway validation, startup). Security is out of scope: it will be replaced by OAuth2 with Keycloak later.
+Stack upgrade: the POM now targets Spring Boot 4.0.5, Java 26, MapStruct 1.6.3 and springdoc-openapi 2.8.8, following the `order-flow` backend. Baseline before the change: `mvn clean compile` failed on JDK 26 with `ExceptionInInitializerError: TypeTag :: UNKNOWN` (Lombok 1.18.32). After the change: `mvn clean compile` succeeds and `mvn test` passes (the single test is still `@Disabled`). Code change needed: `WebSecurityConfig` uses the lambda DSL (`csrf(csrf -> csrf.disable())`, `httpBasic(Customizer.withDefaults())`), because Spring Security 7 removed the no-argument forms. Startup against MySQL 8.0 was verified: the application starts, Flyway validates and applies migrations V1 and V2 on an empty schema, and Tomcat listens on 8080.
+
+Problems found along the way:
+* Spring Boot's Docker Compose integration failed in some runs with `No host port mapping found for container port 3306`. The cause is not confirmed. The port mapping was correct when inspected while the container was running, and the failure did not reproduce on the last run. `SPRING_DOCKER_COMPOSE_ENABLED=false` avoids the integration if it returns.
+* The previous volume `docker_data` was created by MySQL 26.10. MySQL 8.0 refused it (`Cannot downgrade from 261000 to 80045`). The volume was deleted by decision; the schema and sample data were recreated from migrations V1 and V2.
+* The `mysql:latest` tag had resolved to MySQL 26.x, which Flyway (verified up to 8.1) warned about. The `mysql:8.0` pin removes that warning. Security is out of scope: it will be replaced by OAuth2 with Keycloak later.
 
 ## 9. Pending Decisions
 
