@@ -4,7 +4,7 @@
 
 REST API for managing a school: students (`aluno`), staff (`funcionario`), classes (`turma`), subjects (`disciplina`), terms (`periodo`), grades (`nota`) and logins. Originally built as a course-completion project (TCC) and now being refactored.
 
-Stack: Java 17, Spring Boot 3.2.5, Spring Data JPA, MySQL, Flyway, Spring Security (HTTP Basic), MapStruct 1.5.5, Lombok, springdoc-openapi 2.1.0. The local environment starts MySQL through Docker Compose.
+Stack: Java 26, Spring Boot 4.0.5, Spring Data JPA, MySQL, Flyway, Spring Security (HTTP Basic), MapStruct 1.6.3, Lombok (managed by the Boot parent), springdoc-openapi 2.8.8. The stack was upgraded from Java 17 / Spring Boot 3.2.5 / MapStruct 1.5.5 / springdoc 2.1.0. The local environment starts MySQL through Docker Compose.
 
 This document describes the code as it is now (the baseline before refactoring). Refactoring decisions go in section 7 and in the progress document.
 

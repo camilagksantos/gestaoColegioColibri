@@ -37,7 +37,7 @@ Consulte estes arquivos sob demanda, em vez de depender de memória. O status at
 
 ## Commands
 
-Java 17, Spring Boot 3.2.5, Maven wrapper. Não há README, nem configuração de lint ou formatação, e o único teste está `@Disabled`. Os comandos abaixo são de referência; só rode-os com autorização explícita.
+Java 26, Spring Boot 4.0.5, Maven (`mvn`). Não há README, nem configuração de lint ou formatação, e o único teste está `@Disabled`. Os comandos abaixo são de referência; só rode-os com autorização explícita.
 
 - Rodar a aplicação (perfil `local`, sobe o MySQL via Docker Compose): `mvn spring-boot:run`
 - Build: `mvn clean package`

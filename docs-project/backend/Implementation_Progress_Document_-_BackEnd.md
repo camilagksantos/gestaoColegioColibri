@@ -42,11 +42,11 @@ Responses are DTOs (`controller/dtos/response/`); requests are DTOs with Bean Va
 
 ## 5. Dependencies
 
-* Spring Boot 3.2.5 starters: data-jpa, web, validation, security, test; `spring-boot-docker-compose`
-* MySQL Connector/J (runtime), Flyway core and MySQL module
-* MapStruct 1.5.5 with processor, Lombok 1.18.32 (annotation processing configured in `pom.xml`)
-* springdoc-openapi 2.1.0 (Swagger UI)
-* jjwt 0.11.5 (`jjwt-api`, `jjwt-impl`, `jjwt-jackson`): declared but not used by any code
+* Spring Boot 4.0.5 starters: data-jpa, webmvc, validation, security, test, flyway; `spring-boot-docker-compose`
+* MySQL Connector/J (runtime), `flyway-mysql`
+* MapStruct 1.6.3 with processor, Lombok managed by the Boot parent (annotation processing configured in `pom.xml`)
+* springdoc-openapi 2.8.8 (Swagger UI)
+* jjwt removed from the POM (it was not used by any code)
 
 ## 6. Test Coverage
 
@@ -68,7 +68,7 @@ Found in review of the current code. They match the open points in `Context_Docu
 
 ## 8. In Progress
 
-Planned, not started: stack upgrade. Target versions are taken from the `order-flow` backend, which already runs on them: Spring Boot 4.0.5, Java 26, MapStruct 1.6.3, springdoc-openapi 2.8.8, `spring-boot-starter-webmvc`, `spring-boot-starter-flyway` with `flyway-mysql`, Lombok managed by the Boot parent. Security is out of scope for this step: it will be replaced by OAuth2 with Keycloak later.
+Stack upgrade: the POM now targets Spring Boot 4.0.5, Java 26, MapStruct 1.6.3 and springdoc-openapi 2.8.8, following the `order-flow` backend. Baseline before the change: `mvn clean compile` failed on JDK 26 with `ExceptionInInitializerError: TypeTag :: UNKNOWN` (Lombok 1.18.32). After the change: `mvn clean compile` succeeds and `mvn test` passes (the single test is still `@Disabled`). Code change needed: `WebSecurityConfig` uses the lambda DSL (`csrf(csrf -> csrf.disable())`, `httpBasic(Customizer.withDefaults())`), because Spring Security 7 removed the no-argument forms. Not yet done: running the application against MySQL (Flyway validation, startup). Security is out of scope: it will be replaced by OAuth2 with Keycloak later.
 
 ## 9. Pending Decisions
 
