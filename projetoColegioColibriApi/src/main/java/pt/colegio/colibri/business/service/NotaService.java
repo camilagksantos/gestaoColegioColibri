@@ -1,5 +1,6 @@
 package pt.colegio.colibri.business.service;
 
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pt.colegio.colibri.business.core.Aluno;
 import pt.colegio.colibri.business.core.Nota;
@@ -69,14 +70,49 @@ public class NotaService {
     }
 
     public Nota addNota(Nota nota) {
+        if (ehProfessor()) {
+            verificarAlunoDaTurmaDoProfessor(nota.getAlunoId());
+        }
         return notaModel.addNota(nota);
     }
 
     public Nota updateNota(Nota nota) {
+        if (ehProfessor()) {
+            verificarAlunoDaTurmaDoProfessor(notaModel.getNota(nota.getIdNota()).getAlunoId());
+            verificarAlunoDaTurmaDoProfessor(nota.getAlunoId());
+        }
         return notaModel.updateNota(nota);
     }
 
     public void deleteNota(Integer idNota) {
+        if (ehProfessor()) {
+            verificarAlunoDaTurmaDoProfessor(notaModel.getNota(idNota).getAlunoId());
+        }
         notaModel.deleteNota(idNota);
+    }
+
+    private boolean ehProfessor() {
+        return "ROLE_PROFESSOR".equals(SecurityUtils.getRole());
+    }
+
+    // O professor só pode gerir notas de alunos da turma de que é titular.
+    private void verificarAlunoDaTurmaDoProfessor(Integer alunoId) {
+        if (alunoId == null || !idsDosAlunosDaTurmaDoProfessor().contains(alunoId)) {
+            throw new AccessDeniedException("O professor só pode gerir notas dos alunos da sua turma.");
+        }
+    }
+
+    private List<Integer> idsDosAlunosDaTurmaDoProfessor() {
+        var login = loginModel.getLoginByUsername(SecurityUtils.getUsername());
+        var funcionario = funcionarioModel.getFuncionarioByLoginId(login.getIdLogin());
+        var turma = turmaModel.getTurmaByFuncionarioId(funcionario.getId());
+
+        if (turma == null || turma.getIdTurma() == null) {
+            return List.of();
+        }
+
+        return alunoModel.getAlunosByTurmaId(turma.getIdTurma()).stream()
+                .map(Aluno::getId)
+                .toList();
     }
 }
