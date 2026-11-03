@@ -2,6 +2,7 @@ package pt.colegio.colibri.config.error;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
@@ -53,6 +54,13 @@ public class RestExceptionHandler {
     @ExceptionHandler(UsernameNotFoundException.class)
     public ProblemDetail utilizadorNaoEncontrado(UsernameNotFoundException exception) {
         return criar(HttpStatus.UNAUTHORIZED, "Utilizador autenticado não possui login válido.");
+    }
+
+    // Violação de integridade referencial (ex.: apagar um aluno que tem notas) ou de restrição única.
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ProblemDetail conflitoDeDados(DataIntegrityViolationException exception) {
+        return criar(HttpStatus.CONFLICT,
+                "Operação não permitida: o registo está associado a outros dados ou viola uma restrição.");
     }
 
     @ExceptionHandler(Exception.class)

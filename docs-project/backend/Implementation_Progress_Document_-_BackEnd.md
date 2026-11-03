@@ -76,5 +76,5 @@ Problems found along the way:
 
 Each item from `Context_Document_-_BackEnd.md`, section 7, is an open decision. Record the chosen option here when one is made.
 
-* Item 2 (error mapping): decided. Not found → 404; bean validation → 400 with a `erros` map of field → message; `AccessDeniedException` → 403; `UsernameNotFoundException` → 401; anything else → 500 with a generic message and a server-side log. Not-found exceptions use `RecursoNaoEncontradoException`, and deletes check existence first, because Spring Data's `deleteById` does not throw for a missing id.
+* Item 2 (error mapping): decided. Not found → 404; bean validation → 400 with a `erros` map of field → message; `AccessDeniedException` → 403; `UsernameNotFoundException` → 401; referential or unique constraint violation (`DataIntegrityViolationException`, for example deleting a student who has grades) → 409, and the foreign key is kept, so the student is not removed; anything else → 500 with a generic message and a server-side log. Not-found exceptions use `RecursoNaoEncontradoException`, and deletes check existence first, because Spring Data's `deleteById` does not throw for a missing id.
 * Item 7 (tests): deferred by decision; the disabled placeholder test was removed.
