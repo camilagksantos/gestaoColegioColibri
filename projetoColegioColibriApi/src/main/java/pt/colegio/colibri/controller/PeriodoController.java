@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,7 @@ public class PeriodoController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public PeriodoResponseDTO addPeriodo(@RequestBody PeriodoRequestDTO periodoRequestDTO){
+    public PeriodoResponseDTO addPeriodo(@Valid @RequestBody PeriodoRequestDTO periodoRequestDTO){
         Periodo periodo = periodoControllerMapper.convertToPeriodo(periodoRequestDTO);
 
         Periodo periodoSalvo = periodoService.addPeriodo(periodo);
@@ -69,7 +71,7 @@ public class PeriodoController {
     @PutMapping("/{idPeriodo}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.OK)
-    public PeriodoResponseDTO updatePeriodo(@RequestBody PeriodoRequestDTO periodoRequestDTO, @PathVariable Integer idPeriodo){
+    public PeriodoResponseDTO updatePeriodo(@Valid @RequestBody PeriodoRequestDTO periodoRequestDTO, @PathVariable Integer idPeriodo){
         Periodo periodo = periodoControllerMapper.convertToPeriodo(periodoRequestDTO, idPeriodo);
 
         Periodo periodoAtualizado = periodoService.updatePeriodo(periodo);

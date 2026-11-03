@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,7 @@ public class TurmaController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public TurmaResponseDTO addTurma(@RequestBody TurmaRequestDTO turmaRequestDTO){
+    public TurmaResponseDTO addTurma(@Valid @RequestBody TurmaRequestDTO turmaRequestDTO){
         Turma turma = turmaControllerMapper.convertToTurma(turmaRequestDTO);
 
         Turma turmaSalvo = turmaService.addTurma(turma);
@@ -69,7 +71,7 @@ public class TurmaController {
     @PutMapping("/{idTurma}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.OK)
-    public TurmaResponseDTO updateTurma(@RequestBody TurmaRequestDTO turmaRequestDTO, @PathVariable Integer idTurma){
+    public TurmaResponseDTO updateTurma(@Valid @RequestBody TurmaRequestDTO turmaRequestDTO, @PathVariable Integer idTurma){
         Turma turma = turmaControllerMapper.convertToTurma(turmaRequestDTO, idTurma);
 
         Turma turmaAtualizado = turmaService.updateTurma(turma);

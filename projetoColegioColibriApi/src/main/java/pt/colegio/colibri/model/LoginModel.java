@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
@@ -47,7 +49,7 @@ public class LoginModel {
 
     public Login getLogin(Integer idLogin) {
         LoginEntity loginEntity = loginRepository.findById(idLogin)
-                                                 .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                 .orElseThrow(() -> new RecursoNaoEncontradoException("Registo não Encontrado!"));
 
         return loginModelMapper.convertToLogin(loginEntity);
     }
@@ -69,6 +71,9 @@ public class LoginModel {
     }
 
     public void deleteLogin(Integer idLogin) {
+        if (!loginRepository.existsById(idLogin)) {
+            throw new RecursoNaoEncontradoException("Registo não Encontrado!");
+        }
         loginRepository.deleteById(idLogin);
     }
 

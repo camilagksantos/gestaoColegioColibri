@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +59,7 @@ public class AlunoController {
 
     @PostMapping@PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public AlunoResponseDTO addAluno(@RequestBody AlunoRequestDTO alunoRequestDTO){
+    public AlunoResponseDTO addAluno(@Valid @RequestBody AlunoRequestDTO alunoRequestDTO){
         Aluno aluno = alunoControllerMapper.convertToAluno(alunoRequestDTO);
 
         Aluno alunoSalvo = alunoService.addAluno(aluno);
@@ -68,7 +70,7 @@ public class AlunoController {
     @PutMapping("/{idAluno}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.OK)
-    public AlunoResponseDTO updateAluno(@RequestBody AlunoRequestDTO alunoRequestDTO, @PathVariable Integer idAluno){
+    public AlunoResponseDTO updateAluno(@Valid @RequestBody AlunoRequestDTO alunoRequestDTO, @PathVariable Integer idAluno){
         Aluno aluno = alunoControllerMapper.convertToAluno(alunoRequestDTO, idAluno);
 
         Aluno alunoAtualizado = alunoService.updateAluno(aluno);

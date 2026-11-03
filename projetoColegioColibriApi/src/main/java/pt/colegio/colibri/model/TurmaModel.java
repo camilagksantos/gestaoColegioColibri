@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Turma;
@@ -48,7 +50,7 @@ public class TurmaModel {
 
     public Turma getTurma(Integer idTurma) {
         TurmaEntity turmaEntity = turmaRepository.findById(idTurma)
-                                                 .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                 .orElseThrow(() -> new RecursoNaoEncontradoException("Registo não Encontrado!"));
 
         return turmaModelMapper.convertToTurma(turmaEntity);
     }
@@ -76,12 +78,15 @@ public class TurmaModel {
     }
 
     public void deleteTurma(Integer idTurma) {
+        if (!turmaRepository.existsById(idTurma)) {
+            throw new RecursoNaoEncontradoException("Registo não Encontrado!");
+        }
         turmaRepository.deleteById(idTurma);
     }
 
     private FuncionarioEntity getFuncionario(Integer professorId){
         return funcionarioRepository.findById( professorId )
-                                    .orElseThrow(() -> new RuntimeException("Funcionario não Encontrado!"));
+                                    .orElseThrow(() -> new RecursoNaoEncontradoException("Funcionario não Encontrado!"));
     }
 
     public Turma getTurmaByFuncionarioId(Integer id) {

@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Funcionario;
@@ -48,7 +50,7 @@ public class FuncionarioModel {
 
     public Funcionario getFuncionario(Integer idFuncionario) {
         FuncionarioEntity funcionarioEntity = funcionarioRepository.findById(idFuncionario)
-                                                                   .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                                   .orElseThrow(() -> new RecursoNaoEncontradoException("Registo não Encontrado!"));
 
         return funcionarioModelMapper.convertToFuncionario(funcionarioEntity);
     }
@@ -76,12 +78,15 @@ public class FuncionarioModel {
     }
 
     public void deleteFuncionario(Integer idFuncionario) {
+        if (!funcionarioRepository.existsById(idFuncionario)) {
+            throw new RecursoNaoEncontradoException("Registo não Encontrado!");
+        }
         funcionarioRepository.deleteById(idFuncionario);
     }
 
     private LoginEntity getLogin(Integer loginId){
         return loginRepository.findById(loginId)
-                              .orElseThrow(() -> new RuntimeException("Login não Encontrado!"));
+                              .orElseThrow(() -> new RecursoNaoEncontradoException("Login não Encontrado!"));
     }
 
     public Funcionario getFuncionarioByLoginId(Integer idLogin) {

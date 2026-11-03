@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Nota;
@@ -55,7 +57,7 @@ public class NotaModel {
 
     public Nota getNota(Integer idNota) {
         NotaEntity notaEntity = notaRepository.findById(idNota)
-                                              .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                              .orElseThrow(() -> new RecursoNaoEncontradoException("Registo não Encontrado!"));
 
         return notaModelMapper.convertToNota(notaEntity);
     }
@@ -87,22 +89,25 @@ public class NotaModel {
     }
 
     public void deleteNota(Integer idNota) {
+        if (!notaRepository.existsById(idNota)) {
+            throw new RecursoNaoEncontradoException("Registo não Encontrado!");
+        }
         notaRepository.deleteById(idNota);
     }
 
     private DisciplinaEntity getDisciplina(Integer disciplinaId){
         return disciplinaRepository.findById( disciplinaId )
-                                   .orElseThrow(() -> new RuntimeException("Disciplina não Encontrada!"));
+                                   .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não Encontrada!"));
     }
 
     private PeriodoEntity getPeriodo(Integer periodoId){
         return periodoRepository.findById( periodoId )
-                                .orElseThrow(() -> new RuntimeException("Periodo não Encontrado!"));
+                                .orElseThrow(() -> new RecursoNaoEncontradoException("Periodo não Encontrado!"));
     }
 
     private AlunoEntity getAluno(Integer alunoId){
         return alunoRepository.findById( alunoId )
-                              .orElseThrow(() -> new RuntimeException("Aluno não Encontrado!"));
+                              .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não Encontrado!"));
     }
 
     public List<Nota> getNotasByAlunoId(Integer id) {

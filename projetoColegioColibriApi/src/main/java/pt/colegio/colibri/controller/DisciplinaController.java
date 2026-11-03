@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,7 @@ public class DisciplinaController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public DisciplinaResponseDTO addDisciplina(@RequestBody DisciplinaRequestDTO disciplinaRequestDTO){
+    public DisciplinaResponseDTO addDisciplina(@Valid @RequestBody DisciplinaRequestDTO disciplinaRequestDTO){
         Disciplina disciplina = disciplinaControllerMapper.convertToDisciplina(disciplinaRequestDTO);
 
         Disciplina disciplinaSalvo = disciplinaService.addDisciplina(disciplina);
@@ -69,7 +71,7 @@ public class DisciplinaController {
     @PutMapping("/{idDisciplina}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.OK)
-    public DisciplinaResponseDTO updateDisciplina(@RequestBody DisciplinaRequestDTO disciplinaRequestDTO, @PathVariable Integer idDisciplina){
+    public DisciplinaResponseDTO updateDisciplina(@Valid @RequestBody DisciplinaRequestDTO disciplinaRequestDTO, @PathVariable Integer idDisciplina){
         Disciplina disciplina = disciplinaControllerMapper.convertToDisciplina(disciplinaRequestDTO, idDisciplina);
 
         Disciplina disciplinaAtualizado = disciplinaService.updateDisciplina(disciplina);

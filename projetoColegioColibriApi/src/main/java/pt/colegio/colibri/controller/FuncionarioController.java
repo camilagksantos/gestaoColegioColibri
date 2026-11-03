@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,7 @@ public class FuncionarioController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public FuncionarioResponseDTO addFuncionario(@RequestBody FuncionarioRequestDTO funcionarioRequestDTO){
+    public FuncionarioResponseDTO addFuncionario(@Valid @RequestBody FuncionarioRequestDTO funcionarioRequestDTO){
         Funcionario funcionario = funcionarioControllerMapper.convertToFuncionario(funcionarioRequestDTO);
 
         Funcionario funcionarioSalvo = funcionarioService.addFuncionario(funcionario);
@@ -69,7 +71,7 @@ public class FuncionarioController {
     @PutMapping("/{idFuncionario}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR')")
     @ResponseStatus(HttpStatus.OK)
-    public FuncionarioResponseDTO updateFuncionario(@RequestBody FuncionarioRequestDTO funcionarioRequestDTO, @PathVariable Integer idFuncionario){
+    public FuncionarioResponseDTO updateFuncionario(@Valid @RequestBody FuncionarioRequestDTO funcionarioRequestDTO, @PathVariable Integer idFuncionario){
         Funcionario funcionario = funcionarioControllerMapper.convertToFuncionario(funcionarioRequestDTO, idFuncionario);
 
         Funcionario funcionarioAtualizado = funcionarioService.updateFuncionario(funcionario);

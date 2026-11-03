@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Aluno;
@@ -53,7 +55,7 @@ public class AlunoModel {
 
     public Aluno getAluno(Integer idAluno) {
         AlunoEntity alunoEntity = alunoRepository.findById(idAluno)
-                                                 .orElseThrow(() -> new RuntimeException("Aluno não Encontrado!"));
+                                                 .orElseThrow(() -> new RecursoNaoEncontradoException("Aluno não Encontrado!"));
 
         return alunoModelMapper.convertToAluno(alunoEntity);
     }
@@ -83,17 +85,20 @@ public class AlunoModel {
     }
 
     public void deleteAluno(Integer idAluno) {
+        if (!alunoRepository.existsById(idAluno)) {
+            throw new RecursoNaoEncontradoException("Aluno não Encontrado!");
+        }
         alunoRepository.deleteById(idAluno);
     }
 
     private LoginEntity getLogin(Integer loginId){
         return loginRepository.findById(loginId)
-                              .orElseThrow(() -> new RuntimeException("Login não Encontrado!"));
+                              .orElseThrow(() -> new RecursoNaoEncontradoException("Login não Encontrado!"));
     }
 
     private TurmaEntity getTurma(Integer turmaId){
         return turmaRepository.findById(turmaId)
-                .orElseThrow(() -> new RuntimeException("Turma não Encontrada!"));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Turma não Encontrada!"));
     }
 
     public List<Aluno> getAlunosByTurmaId(Integer idTurma) {

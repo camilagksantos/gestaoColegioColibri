@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Periodo;
@@ -44,7 +46,7 @@ public class PeriodoModel {
 
     public Periodo getPeriodo(Integer idPeriodo) {
         PeriodoEntity periodoEntity = periodoRepository.findById(idPeriodo)
-                                                       .orElseThrow(() -> new RuntimeException("Registo não Encontrado!"));
+                                                       .orElseThrow(() -> new RecursoNaoEncontradoException("Registo não Encontrado!"));
 
         return periodoModelMapper.convertToPeriodo(periodoEntity);
     }
@@ -68,6 +70,9 @@ public class PeriodoModel {
     }
 
     public void deletePeriodo(Integer idPeriodo) {
+        if (!periodoRepository.existsById(idPeriodo)) {
+            throw new RecursoNaoEncontradoException("Registo não Encontrado!");
+        }
         periodoRepository.deleteById(idPeriodo);
     }
 }

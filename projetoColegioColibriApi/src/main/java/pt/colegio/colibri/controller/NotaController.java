@@ -1,5 +1,7 @@
 package pt.colegio.colibri.controller;
 
+import jakarta.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +60,7 @@ public class NotaController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR', 'ROLE_PROFESSOR')")
     @ResponseStatus(HttpStatus.CREATED)
-    public NotaResponseDTO addNota(@RequestBody NotaRequestDTO notaRequestDTO){
+    public NotaResponseDTO addNota(@Valid @RequestBody NotaRequestDTO notaRequestDTO){
         Nota nota = notaControllerMapper.convertToNota(notaRequestDTO);
 
         Nota notaSalvo = notaService.addNota(nota);
@@ -69,7 +71,7 @@ public class NotaController {
     @PutMapping("/{idNota}")
     @PreAuthorize("hasAnyRole('ROLE_DIRETOR', 'ROLE_PROFESSOR')")
     @ResponseStatus(HttpStatus.OK)
-    public NotaResponseDTO updateNota(@RequestBody NotaRequestDTO notaRequestDTO, @PathVariable Integer idNota){
+    public NotaResponseDTO updateNota(@Valid @RequestBody NotaRequestDTO notaRequestDTO, @PathVariable Integer idNota){
         Nota nota = notaControllerMapper.convertToNota(notaRequestDTO, idNota);
 
         Nota notaAtualizado = notaService.updateNota(nota);

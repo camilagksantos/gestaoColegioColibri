@@ -1,5 +1,7 @@
 package pt.colegio.colibri.model;
 
+import pt.colegio.colibri.config.error.RecursoNaoEncontradoException;
+
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 import pt.colegio.colibri.business.core.Disciplina;
@@ -45,7 +47,7 @@ public class DisciplinaModel {
 
     public Disciplina getDisciplina(Integer idDisciplina) {
         DisciplinaEntity disciplinaEntity = disciplinaRepository.findById(idDisciplina)
-                                                                .orElseThrow(() -> new RuntimeException("Disciplina não Encontrada!"));
+                                                                .orElseThrow(() -> new RecursoNaoEncontradoException("Disciplina não Encontrada!"));
 
         return disciplinaModelMapper.convertToDisciplina(disciplinaEntity);
     }
@@ -69,6 +71,9 @@ public class DisciplinaModel {
     }
 
     public void deleteDisciplina(Integer idDisciplina) {
+        if (!disciplinaRepository.existsById(idDisciplina)) {
+            throw new RecursoNaoEncontradoException("Disciplina não Encontrada!");
+        }
         disciplinaRepository.deleteById(idDisciplina);
     }
 }
