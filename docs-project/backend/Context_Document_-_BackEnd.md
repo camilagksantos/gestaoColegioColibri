@@ -63,7 +63,7 @@ Scoping applied inside services, on the list endpoints only:
 - `NotaService.getNotas()`: PROFESSOR gets the notes of students in the class (`turma`) they teach; ALUNO gets their own notes; any other role gets all notes.
 - `AlunoService.getAlunos()`: PROFESSOR gets the students of their class; ALUNO gets the students of their own class (classmates included); any other role gets all students.
 
-The scoping does not apply to the by-id endpoints or to writes (see section 6).
+Write scoping: `NotaService.addNota`, `updateNota` and `deleteNota` refuse a PROFESSOR (403) unless the student of the note (before and after the change) belongs to the class they teach. DIRETOR is not restricted. The scoping does not apply to the by-id GET endpoints (see section 7, item 3).
 
 ## 5. Persistence
 
@@ -76,8 +76,8 @@ The scoping does not apply to the by-id endpoints or to writes (see section 6).
 
 - Domain classes are separate from JPA entities. Mapping is done by MapStruct in both directions at the controller and model boundaries.
 - Passwords are stored and compared in plain text. `NoOpPasswordEncoder` is the active bean; the BCrypt bean is commented out in `WebSecurityConfig`.
-- `RestExceptionHandler` catches `Exception` and returns a `ProblemDetail` with status 500 for every error, including not-found and authentication-lookup failures. The exception message is returned in `detail`.
-- Only the `local` profile is active by default. It has hardcoded local credentials and enables Docker Compose startup (`docker/docker-compose.yaml`). The `db` profile reads `MYSQL_HOST`, `MYSQL_USERNAME` and `MYSQL_PASSWORD` from the environment.
+- `RestExceptionHandler` returns a `ProblemDetail` per error type: not-found (`RecursoNaoEncontradoException`, empty delete) → 404; bean validation → 400 with an `erros` map; referential or unique constraint violation → 409; access denied → 403; `UsernameNotFoundException` → 401; anything else → 500 with a generic message and a server-side log.
+- Only the `local` profile is active by default. Its database user and password come from `MYSQL_USERNAME` and `MYSQL_PASSWORD`, defaulting to `root`/`root`. It enables Docker Compose startup (`docker/docker-compose.yaml`). The `db` profile reads `MYSQL_HOST`, `MYSQL_USERNAME` and `MYSQL_PASSWORD` from the environment.
 - `spring-boot-docker-compose` is on the classpath; this is what starts MySQL automatically with the local profile.
 
 ## 7. Open Points for the Refactoring
@@ -87,10 +87,10 @@ These are not decided yet. Each needs a decision before the code changes.
 Decision (current): security will be replaced by OAuth2 with Keycloak. Items 1 to 3 are therefore deferred and will not be changed before that migration. The current stack upgrade (Spring Boot 4, Java 26, MapStruct 1.6, springdoc 2.8) comes first.
 
 1. **Password storage.** Replace plain text with BCrypt (the commented bean already exists), and decide how existing rows are migrated. *Deferred: replaced by Keycloak.*
-2. **Error mapping.** Map not-found to 404, validation to 400, auth to 401/403, and keep 500 for real failures. Stop returning raw exception messages.
+2. **Error mapping.** *Resolved:* mapping is in place (see section 6).
 3. **By-id ownership.** `GET /alunos/{id}` and `GET /notas/{id}` have no check, so any authenticated user can read any record. Decide the rule per role (for example: ALUNO only their own, PROFESSOR only their class). *Deferred: to be defined with Keycloak roles.*
-4. **Write ownership.** A PROFESSOR can update or delete any nota, not only those of their class. Decide whether to restrict this.
-5. **Classmate visibility.** ALUNO can list all students in their class, including email addresses. Decide whether this is intended.
-6. **Unused dependencies.** The `jjwt` artifacts are declared in `pom.xml` but no code uses them. Remove them or start using them.
+4. **Write ownership.** *Resolved:* a PROFESSOR can only add, update or delete notes of students in their class (section 4).
+5. **Classmate visibility.** *Resolved:* kept as is by decision; ALUNO can list classmates with name and email.
+6. **Unused dependencies.** *Resolved:* the `jjwt` artifacts are not in `pom.xml` anymore; all remaining dependencies are used.
 7. **Tests.** The only test class is `@Disabled` and has an empty body. Decide what the test baseline should be.
-8. **Config secrets.** `application-local.yaml` holds local credentials in plain text and `V2__db_dados.sql` seeds sample logins with plain-text passwords. Decide how to handle both.
+8. **Config secrets.** *Partly resolved:* the local database credentials are read from `MYSQL_USERNAME` and `MYSQL_PASSWORD`, with `root` as the default. `V2__db_dados.sql` still seeds sample logins with plain-text passwords, kept until the Keycloak migration.

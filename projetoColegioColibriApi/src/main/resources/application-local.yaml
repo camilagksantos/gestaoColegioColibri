@@ -5,6 +5,6 @@ spring:
       file: docker/docker-compose.yaml
   datasource:
     url: jdbc:mysql://localhost:3306/bd_projeto_colegio_colibri
-    username: root
-    password: root
+    username: ${MYSQL_USERNAME:root}
+    password: ${MYSQL_PASSWORD:root}
 

@@ -58,7 +58,6 @@ Found in review of the current code. They match the open points in `Context_Docu
 
 * Passwords are stored and compared in plain text (`NoOpPasswordEncoder`).
 * `GET /alunos/{id}` and `GET /notas/{id}` have no ownership check.
-* PROFESSOR can update and delete any nota (`NotaService.updateNota`, `deleteNota`), not only those of their class.
 * ALUNO can list all students of their class (`AlunoService.getAlunos`).
 * `jjwt` dependencies are unused.
 * `SecurityUtils.getRole()` returns only the first granted authority.
@@ -78,3 +77,7 @@ Each item from `Context_Document_-_BackEnd.md`, section 7, is an open decision. 
 
 * Item 2 (error mapping): decided. Not found → 404; bean validation → 400 with a `erros` map of field → message; `AccessDeniedException` → 403; `UsernameNotFoundException` → 401; referential or unique constraint violation (`DataIntegrityViolationException`, for example deleting a student who has grades) → 409, and the foreign key is kept, so the student is not removed; anything else → 500 with a generic message and a server-side log. Not-found exceptions use `RecursoNaoEncontradoException`, and deletes check existence first, because Spring Data's `deleteById` does not throw for a missing id.
 * Item 7 (tests): deferred by decision; the disabled placeholder test was removed.
+* Item 4 (write ownership): decided. A PROFESSOR can add, update and delete only notes of students in the class they teach (`NotaService`, 403 otherwise). Tested with curl: deleting or editing a note of another class returns 403 and changes nothing.
+* Item 5 (classmate visibility): decided. Kept: ALUNO can list classmates with name and email.
+* Item 6 (unused dependencies): done before this change; the POM has no jjwt artifacts.
+* Item 8 (config secrets): decided. The local profile reads `MYSQL_USERNAME` and `MYSQL_PASSWORD`, defaulting to `root`. The seed passwords stay until the Keycloak migration.
